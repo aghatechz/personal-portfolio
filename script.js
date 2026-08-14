@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 1. PAGE LOADER ---
   const loaderWrapper = document.getElementById('loader-wrapper');
   const loaderProgress = document.getElementById('loader-progress');
-  
+
   if (loaderWrapper && loaderProgress) {
     // Create and insert robot runner above progress bar
     const progressBg = loaderProgress.parentElement;
@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let elapsed = 0;
     const duration = 2000; // Optimized total loading time (2 seconds instead of 2.5)
     const intervalTime = 25;
-    
+
     const loadingInterval = setInterval(() => {
       elapsed += intervalTime;
-      
+
       if (elapsed < waveTime) {
         // Waving state (stay at 0%)
         progress = 0;
@@ -49,15 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
           loaderRobot.classList.remove('waving');
           loaderRobot.classList.add('running');
         }
-        
+
         const runElapsed = elapsed - waveTime;
         const runDuration = duration - waveTime;
         progress = (runElapsed / runDuration) * 100;
-        
+
         if (progress >= 100) {
           progress = 100;
           clearInterval(loadingInterval);
-          
+
           // Fade out page loader
           setTimeout(() => {
             loaderWrapper.classList.add('fade-out');
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 300);
         }
       }
-      
+
       loaderProgress.style.width = `${progress}%`;
       if (loaderRobot) {
         loaderRobot.style.left = `${progress}%`;
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function typeEffect() {
       const currentRole = roles[roleIndex];
-      
+
       if (isDeleting) {
         typingElement.textContent = currentRole.substring(0, charIndex - 1);
         charIndex--;
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 5. SCROLL-REVEAL SYSTEM (INTERSECTION OBSERVER) ---
   const revealElements = document.querySelectorAll('.reveal');
-  
+
   if (revealElements.length > 0) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         projectCards.forEach(card => {
           card.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-          
+
           if (category === 'all' || card.getAttribute('data-category') === category) {
             card.style.display = 'flex';
             setTimeout(() => {
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         currentIndex = index;
       }
-      
+
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
       updateDots();
       resetAutoSlide();
@@ -415,12 +415,12 @@ document.addEventListener('DOMContentLoaded', () => {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         let isValid = true;
-        
+
         const inputs = form.querySelectorAll('.form-control[required]');
-        
+
         inputs.forEach(input => {
           const errorMsg = input.nextElementSibling;
-          
+
           if (!input.value.trim()) {
             isValid = false;
             input.classList.add('invalid');
@@ -485,14 +485,14 @@ document.addEventListener('DOMContentLoaded', () => {
   setupFormValidation('contact-form', 'contact-success');
   setupFormValidation('claim-form', 'claim-success');
 
-  // --- 10. BACKGROUND STARFIELD (SPACE EFFECT - PERFORMANCE OPTIMIZED) ---
+  // --- 10. BACKGROUND STARFIELD (SPACE EFFECT - LOW COUNT, LARGER & PURE BRIGHT WHITE) ---
   const canvas = document.createElement('canvas');
   canvas.id = 'starfield-canvas';
   document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d');
 
   let stars = [];
-  const maxStars = 75; // Reduced from 150 to optimize performance
+  const maxStars = 120; // Reduced quantity for clean spacious feel
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -506,19 +506,19 @@ document.addEventListener('DOMContentLoaded', () => {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.2 + 0.4, // sizes from 0.4px to 1.6px
-        alpha: Math.random(),
-        twinkleSpeed: 0.003 + Math.random() * 0.005,
+        size: Math.random() * 2.8 + 2.2, // Larger size: 2.2px to 5.0px
+        alpha: Math.random() * 0.6 + 0.4, // Solid bright alpha range
+        twinkleSpeed: 0.002 + Math.random() * 0.003,
         twinkleDirection: Math.random() > 0.5 ? 1 : -1,
-        vx: (Math.random() - 0.5) * 0.03, // Throttled drift speed
-        vy: (Math.random() - 0.5) * 0.03
+        vx: (Math.random() - 0.5) * 0.02,
+        vy: (Math.random() - 0.5) * 0.02
       });
     }
   }
 
   function animateStars() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#ffffff'; // Solid Pure White
 
     stars.forEach(star => {
       // Slow drift
@@ -531,19 +531,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (star.y > canvas.height) star.y = 0;
       if (star.y < 0) star.y = canvas.height;
 
-      // Twinkle logic
+      // Pure white twinkle logic
       star.alpha += star.twinkleSpeed * star.twinkleDirection;
-      if (star.alpha >= 0.95) {
-        star.alpha = 0.95;
+      if (star.alpha >= 1.0) {
+        star.alpha = 1.0;
         star.twinkleDirection = -1;
-      } else if (star.alpha <= 0.15) {
-        star.alpha = 0.15;
+      } else if (star.alpha <= 0.40) {
+        star.alpha = 0.40;
         star.twinkleDirection = 1;
       }
 
       ctx.globalAlpha = star.alpha;
       ctx.beginPath();
-      // Draw as simple rectangles instead of circles for canvas rendering efficiency
       ctx.fillRect(star.x, star.y, star.size, star.size);
     });
 
@@ -556,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(resizeCanvas, 200);
   });
-  
+
   resizeCanvas();
   animateStars();
 
@@ -836,7 +835,7 @@ function appendCaseStudyModal() {
       </div>
     </div>
   `;
-  
+
   const div = document.createElement('div');
   div.innerHTML = modalHtml.trim();
   document.body.appendChild(div.firstChild);
@@ -846,7 +845,7 @@ function openCaseStudy(projectId) {
   appendCaseStudyModal();
   const modal = document.getElementById('case-study-modal');
   const data = caseStudies[projectId];
-  
+
   if (!modal || !data) return;
 
   // Set titles and content
@@ -928,7 +927,7 @@ function updatePlannerCalculations() {
   const displayVal = document.getElementById('scope-value-display');
   const priceDisplay = document.getElementById('planner-price-display');
   const timelineDisplay = document.getElementById('planner-timeline-display');
-  
+
   if (!slider || !priceDisplay || !timelineDisplay) return;
 
   let multiplier = 1.0;
@@ -966,7 +965,7 @@ function updatePlannerCalculations() {
   let finalPrice = Math.round(totalPrice * multiplier);
   let finalDaysMin = Math.round(totalDays * multiplier * 0.85);
   let finalDaysMax = Math.round(totalDays * multiplier * 1.2);
-  
+
   if (finalDaysMin < 2) finalDaysMin = 2;
   if (finalDaysMax < 4) finalDaysMax = 4;
 
@@ -983,7 +982,7 @@ function prefillContactFormFromPlanner() {
   const cards = document.querySelectorAll('.planner-option-card');
   const slider = document.getElementById('planner-scope-slider');
   const messageBox = document.getElementById('message');
-  
+
   if (!messageBox) return;
 
   let selectedModules = [];
@@ -1018,7 +1017,7 @@ function prefillContactFormFromPlanner() {
   messageText += `I would like to claim my 20% discount slot and discuss building this custom system.`;
 
   messageBox.value = messageText;
-  
+
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.scrollIntoView({ behavior: 'smooth' });
@@ -1050,27 +1049,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const chatbotKnowledge = {
     services: "Agha's core services include:\n\n1. **AI & Chatbot Integration**: Integrating custom LLMs (OpenAI/Gemini) inside WhatsApp, Slack, or websites.\n2. **Workflow Automation**: Automating repetitive workflows and system syncs using n8n and Make.\n3. **Full-Stack Development**: Building high-speed, secure dashboards and custom web apps with React, Next.js, and Node.js.\n\nType **'hire'** to discuss a project!",
-    
+
     projects: "Agha has delivered high-performance systems, including these top 3 featured projects:\n\n1. **Al-Mustafa Academy Portal**: Next.js & OpenAI portal saving 95% of admin work.\n2. **The Book Ship**: AI-powered e-commerce platform with Gemini API summaries and Stripe.\n3. **Academic LMS Portal**: Custom LMS built with React, Node.js, and GSAP timeline layouts.\n\nType **'hire'** to start a custom project!",
-    
+
     contact: "You can reach out to Agha through:\n\n* **WhatsApp**: [Chat directly on WhatsApp](https://wa.me/923306853209)\n* **Contact Form**: Scroll down and fill out the contact form on this page.\n* **Book a Call**: Schedule a call directly on the [Consultation Page](consultation.html).\n\nAgha typically responds within 24 hours!",
-    
+
     skills: "Agha's full tech stack:\n\n* **Frontend**: HTML5, CSS3, JS, TS, React.js, Next.js, Tailwind CSS, Figma.\n* **Backend & DB**: Node.js, Python, Supabase, Firebase, MongoDB, PostgreSQL, REST APIs.\n* **Tools & DevOps**: Docker, GitHub, AWS.",
-    
+
     pricing: "Agha's pricing details:\n\n* **Active Offer**: Get **20% Off** for the first 3 clients this month!\n* **Interactive Planner**: Try the **Project Planner** widget below to calculate instant estimates and timelines!\n* **Custom Quote**: Reach out directly via WhatsApp to discuss detailed scope and requirements.",
-    
+
     fallback: "I couldn't find details on that. Try clicking one of the suggestions or type a keyword:\n\n* **'services'** - Services details\n* **'projects'** - Portfolio & case studies\n* **'skills'** - Tech stack\n* **'hire'** - Contact & WhatsApp details\n* **'pricing'** - Pricing & discount offers"
   };
 
   // Toggle Chat window
-  triggerBtn.addEventListener('click', () => {
+  triggerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     chatWindow.classList.add('active');
     triggerBtn.style.display = 'none';
   });
 
-  closeBtn.addEventListener('click', () => {
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     chatWindow.classList.remove('active');
     triggerBtn.style.display = 'flex';
+  });
+
+  // Close chatbot when clicking outside
+  document.addEventListener('click', (e) => {
+    const chatbotContainer = document.getElementById('ai-chatbot-container');
+    if (chatbotContainer && chatWindow.classList.contains('active')) {
+      if (!chatbotContainer.contains(e.target)) {
+        chatWindow.classList.remove('active');
+        triggerBtn.style.display = 'flex';
+      }
+    }
   });
 
   // Suggestion buttons click handler
@@ -1096,10 +1108,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleUserMessage(text) {
     // Add user message bubble
     appendMessage(text, 'user-msg');
-    
+
     // Add typing indicator
     const typingId = appendTypingIndicator();
-    
+
     // Respond after small delay to feel like direct AI typing
     setTimeout(() => {
       removeTypingIndicator(typingId);
@@ -1110,7 +1122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getChatbotResponse(userMessage) {
     const msg = userMessage.toLowerCase().trim();
-    
+
     if (msg.includes('service') || msg.includes('offer') || msg.includes('do') || msg.includes('capabilities') || msg.includes('work detail')) {
       return chatbotKnowledge.services;
     }
@@ -1129,26 +1141,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('greeting') || msg.includes('sup') || msg.includes('yo')) {
       return "Hi there! I am Agha's AI Assistant. I have full knowledge of his website and portfolio. Ask me anything!";
     }
-    
+
     return chatbotKnowledge.fallback;
   }
 
   function appendMessage(text, className) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `chatbot-message ${className}`;
-    
+
     const msgBubble = document.createElement('div');
     msgBubble.className = 'msg-bubble';
-    
+
     if (className === 'bot-msg') {
       msgBubble.innerHTML = formatResponse(text);
     } else {
       msgBubble.textContent = text;
     }
-    
+
     messageDiv.appendChild(msgBubble);
     messagesContainer.appendChild(messageDiv);
-    
+
     // Scroll to bottom
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
@@ -1158,7 +1170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const typingDiv = document.createElement('div');
     typingDiv.className = 'chatbot-message bot-msg';
     typingDiv.id = typingId;
-    
+
     typingDiv.innerHTML = `
       <div class="msg-bubble">
         <div class="typing-dots">
@@ -1168,7 +1180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     `;
-    
+
     messagesContainer.appendChild(typingDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     return typingId;
