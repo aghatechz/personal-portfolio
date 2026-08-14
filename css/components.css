@@ -1030,7 +1030,7 @@ body.modal-open {
 /* --- AI CHATBOT WIDGET STYLE --- */
 .chatbot-container {
   position: fixed;
-  bottom: 6.5rem;
+  bottom: 2rem;
   right: 2rem;
   z-index: 1000;
 }
@@ -1186,9 +1186,9 @@ body.modal-open {
 }
 
 .chatbot-close-btn:hover {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  color: #000000;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0a0b10;
   transform: rotate(90deg);
 }
 
@@ -1353,7 +1353,7 @@ body.modal-open {
 
 @media (max-width: 768px) {
   .chatbot-container {
-    bottom: 5rem;
+    bottom: 1.5rem;
     right: 1.5rem;
   }
 
