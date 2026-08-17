@@ -620,6 +620,48 @@ function downloadCV() {
 
 // --- CASE STUDIES DATA STORE ---
 const caseStudies = {
+  'resume-analyzer': {
+    title: 'AI Resume Analyzer & Job Recommender',
+    challenge: 'Job seekers struggle to optimize their resumes for ATS screening algorithms and match relevant open positions effectively.',
+    solution: 'Engineered an AI-powered analyzer using Next.js and OpenAI API that extracts resume text, computes ATS compatibility scores, and provides instant career recommendations.',
+    tech: 'Next.js, OpenAI API, TypeScript, Tailwind CSS, Vercel',
+    features: [
+      'Automated resume PDF parsing & ATS score calculations.',
+      'OpenAI-driven skill gap analysis and improvement suggestions.',
+      'Personalized job recommendation matching engine.',
+      'Fast, secure client-side file upload and processing.'
+    ],
+    metrics: { val1: '92%', lbl1: 'ATS Match Accuracy', val2: '<3s', lbl2: 'Analysis Time', val3: '4.2x', lbl3: 'Interview Call Rate' },
+    testimonial: '"The AI Resume Analyzer provides instant actionable insights and ATS scoring, helping candidates land interviews faster."'
+  },
+  'aero-steps': {
+    title: 'Aero Steps Web Platform',
+    challenge: 'Aero Steps required a modern, highly responsive web showcase with sub-second page loads and sleek brand presentation.',
+    solution: 'Designed and deployed a Next.js web application utilizing React, TypeScript, and Tailwind CSS for seamless mobile-first browsing and instant interactivity.',
+    tech: 'Next.js, React.js, TypeScript, Tailwind CSS, Vercel',
+    features: [
+      'Interactive product showcases and modern card layouts.',
+      'Sub-second page rendering and high Lighthouse performance.',
+      'Responsive multi-device viewport optimization.',
+      'Sleek micro-animations and intuitive navigation.'
+    ],
+    metrics: { val1: '0.9s', lbl1: 'Page Load Speed', val2: '99', lbl2: 'Performance Score', val3: '3x', lbl3: 'User Engagement' },
+    testimonial: '"Aero Steps website delivered an exceptional user experience and fast loading speeds across all devices."'
+  },
+  'dental-clinic': {
+    title: 'Dental Clinic 3D Web App',
+    challenge: 'Modern dental practices struggle to visually engage clients and explain procedures online, leading to lower booking conversion rates.',
+    solution: 'Engineered an interactive 3D web application utilizing Three.js and React, featuring 3D dental model rendering and instant online appointment scheduling.',
+    tech: 'Three.js, React.js, TypeScript, Next.js, Tailwind CSS',
+    features: [
+      'Interactive 3D dental model viewport.',
+      'Instant patient booking & consultation scheduling.',
+      'High-speed 60fps web graphics optimization.',
+      'Responsive mobile & desktop 3D view controls.'
+    ],
+    metrics: { val1: '3.5x', lbl1: 'Patient Engagement', val2: '60fps', lbl2: '3D Render Speed', val3: '45%', lbl3: 'Bookings Increase' },
+    testimonial: '"The interactive 3D dental clinic app exceeded our expectations. Patients can explore procedures dynamically, and online bookings have increased drastically."'
+  },
   'almustafa': {
     title: 'Al-Mustafa Academy Portal',
     challenge: 'A prominent academy faced manual grading backlogs, certificate issuance delays, and poor operational data oversight.',
@@ -1050,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbotKnowledge = {
     services: "Agha's core services include:\n\n1. **AI & Chatbot Integration**: Integrating custom LLMs (OpenAI/Gemini) inside WhatsApp, Slack, or websites.\n2. **Workflow Automation**: Automating repetitive workflows and system syncs using n8n and Make.\n3. **Full-Stack Development**: Building high-speed, secure dashboards and custom web apps with React, Next.js, and Node.js.\n\nType **'hire'** to discuss a project!",
 
-    projects: "Agha has delivered high-performance systems, including these top 3 featured projects:\n\n1. **Al-Mustafa Academy Portal**: Next.js & OpenAI portal saving 95% of admin work.\n2. **The Book Ship**: AI-powered e-commerce platform with Gemini API summaries and Stripe.\n3. **Academic LMS Portal**: Custom LMS built with React, Node.js, and GSAP timeline layouts.\n\nType **'hire'** to start a custom project!",
+    projects: "Agha has delivered high-performance systems, including these top featured projects:\n\n1. **Dental Clinic 3D**: Interactive 3D web app with live model viewing & appointment booking.\n2. **AI Resume Analyzer**: AI-powered ATS resume analyzer & job recommender.\n3. **Aero Steps**: High-performance modern web platform with Next.js & Tailwind.\n4. **AI Agency Enterprise**: Enterprise-grade platform with Gemini API scaling.\n5. **UK SIM Website**: High-performance SIM platform with instant digital orders.\n6. **Al-Mustafa Academy Portal**: Next.js & OpenAI portal saving 95% of admin work.\n\nType **'hire'** to start a custom project!",
 
     contact: "You can reach out to Agha through:\n\n* **WhatsApp**: [Chat directly on WhatsApp](https://wa.me/923306853209)\n* **Contact Form**: Scroll down and fill out the contact form on this page.\n* **Book a Call**: Schedule a call directly on the [Consultation Page](consultation.html).\n\nAgha typically responds within 24 hours!",
 
@@ -1126,7 +1168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (msg.includes('service') || msg.includes('offer') || msg.includes('do') || msg.includes('capabilities') || msg.includes('work detail')) {
       return chatbotKnowledge.services;
     }
-    if (msg.includes('project') || msg.includes('work') || msg.includes('portfolio') || msg.includes('almustafa') || msg.includes('bookship') || msg.includes('lms')) {
+    if (msg.includes('project') || msg.includes('work') || msg.includes('portfolio') || msg.includes('resume') || msg.includes('analyzer') || msg.includes('aero') || msg.includes('dental') || msg.includes('almustafa') || msg.includes('bookship') || msg.includes('lms')) {
       return chatbotKnowledge.projects;
     }
     if (msg.includes('hire') || msg.includes('contact') || msg.includes('reach') || msg.includes('whatsapp') || msg.includes('number') || msg.includes('email') || msg.includes('phone') || msg.includes('cv') || msg.includes('resume')) {
